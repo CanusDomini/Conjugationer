@@ -1,6 +1,6 @@
 require "CSV"
 
-    $arr_of_arrs = CSV.read('jlptverbs5.csv')
+    $arr_of_arrs = CSV.read('GermanVerbs.csv')
 
     def time_length
 
@@ -19,66 +19,93 @@ require "CSV"
 
           p "Please enter a number."
           time_length
+
         end
       end
     end
-        # HOW CAN I DISABLE TIMED ROUNDS AND MAKE THEM UNLIMITED TIME?
-    #   p "Would you like your rounds to be timed: y/n?"
-    # timed_option = gets.chomp
-    #
-    # if timed_option == 'y'
-    #
-    #   time_length
-    #
-    # elsif timed_option == 'n'
-    #   @round_length = -1
-    #   round
-    #
-    # else
-    #   p "Please enter {y} or {n}"
-    # end
 
-def form
-  p "What form do you want to play with: plain non-past/plain past/te form/i form/ifs/potential/passive/causative/causative passive/volitional/conjectural/alternative/imperative?"
-  $form_option = gets.chomp
-  if $form_option  == "plain non-past" || $form_option  == "np"
-    $verb_form = (2..5)
-  elsif $form_option  == "plain past" || $form_option  == 'pp'
-    $verb_form = (8..11)
-  elsif $form_option  == "te form" || $form_option  == 'tf'
-    $verb_form = (12..15)
-  elsif $form_option  == "i form"
-    $verb_form = (16)
-  elsif $form_option  == "ifs"
-    $verb_form = (17..28)
-  elsif $form_option  == "potential" || $form_option  == 'po'
-    $verb_form = (29..32)
-  elsif $form_option  == "passive" || $form_option  == 'pa'
-    $verb_form = (33..36)
-  elsif $form_option  == "causative" || $form_option  == 'c'
-    $verb_form = (37..44)
-  elsif $form_option  == "causative passive" || $form_option  == 'cp'
-    $verb_form = (45..52)
-  elsif $form_option  == "volitional" || $form_option  == 'v'
-    $verb_form = (53..56)
-  elsif $form_option  == "conjectural" || $form_option  == 'co'
-    $verb_form = (57..60)
-  elsif $form_option  == "alternative" || $form_option  == 'a'
-    $verb_form = (61..64)
-  elsif $form_option  == "imperative" || $form_option  == 'i'
-    $verb_form = (65..67)
+
+def mood
+  p "What mood would you like to play with: indicative/subjunctive/conditional?"
+  mood_option = gets.chomp
+  if mood_option == 'indicative' || mood_option == 'i'
+    indicative_tenses
+  elsif mood_option == 'subjunctive' || mood_option == 's'
+    subjunctive_tenses
+  elsif mood_option == 'conditional' || mood_option == 'c'
+    conditional_tenses
   else
-    "Please type an option from the list."
+    p "Please enter an option from the list."
+    mood
+  end
+end
+
+def indicative_tenses
+  p "What tense would you like to play with: present/perfect/past/pluperfect/future 1/future 2?"
+
+  $tense_option = gets.chomp
+  if $tense_option  == "present" || $tense_option  == "p"
+    $verb_form = (6..11)
+  elsif $tense_option  == "perfect" || $tense_option  == 'pf'
+    $verb_form = (13..18)
+  elsif $tense_option  == "past" || $tense_option  == 'pa'
+    $verb_form = (20..25)
+  elsif $tense_option  == "pluperfect" || $tense_option == "pp"
+    $verb_form = (27..32)
+  elsif $tense_option  == "future 1" || $tense_option  == 'f1'
+    $verb_form = (34..39)
+  elsif $tense_option  == "future 2" || $tense_option  == 'f2'
+    $verb_form = (41..46)
+  else
+    p "Please enter a form from the list."
+    indicative_tenses
   end
   time_length
 end
+
+def subjunctive_tenses
+
+  p "What tense would you like to play with: present/perfect/past/pluperfect"
+
+  $tense_option = gets.chomp
+  if $tense_option  == "present" || $tense_option  == "p"
+    $verb_form = (48..53)
+  elsif $tense_option  == "perfect" || $tense_option  == 'pf'
+    $verb_form = (55..60)
+  elsif $tense_option  == "past" || $tense_option  == 'pa'
+    $verb_form = (62..67)
+  elsif $tense_option  == "pluperfect" || $tense_option == "pp"
+    $verb_form = (69..74)
+  else
+    p "Please enter a form from the list."
+    subjunctive_tenses
+  end
+  time_length
+end
+
+def conditional_tenses
+
+  p "What tense would you like to play with: present/perfect"
+
+  $tense_option = gets.chomp
+  if $tense_option  == "present" || $tense_option  == "p"
+    $verb_form = (76..81)
+  elsif $tense_option  == "perfect" || $tense_option  == 'pf'
+    $verb_form = (83..88)
+  else
+    p "Please enter a form from the list."
+    conditional_tenses
+  end
+  time_length
+end
+
 
 def continue
   p "Would you like to continue?"
   p "y/n?"
   continue_option = gets.chomp
   if continue_option == 'y'
-    form
+    mood
   elsif continue_option == 'n'
     exit[0]
   else
@@ -86,6 +113,7 @@ def continue
     continue
   end
 end
+
 
 def study_list
   make_list_option = gets.chomp
@@ -118,20 +146,18 @@ def round
 
 
   while true
-
-    verb_form_chooser = rand($verb_form)
-    row_specifier = (rand(1..161))
+    p $verb_form
+    p verb_form_chooser = rand($verb_form)
+    row_specifier = (rand(1..431))
     verb_row = $arr_of_arrs[row_specifier]
-    hiragana_verb = verb_row[1]
-    kanji_verb = verb_row[2]
+    infinitive = verb_row[1]
     correct_answer = verb_row[verb_form_chooser]
     form_question = $arr_of_arrs[0][verb_form_chooser]
     mood = verb_row[3]
     meaning = verb_row[0]
-    #question = "What is the #{form_question} #{tense_choice} of #{infinitive_verb} in the #{mood} mood?"
 
-    p "#{kanji_verb} (#{hiragana_verb})"
-    p "#{meaning}"
+    p "#{infinitive}"
+    p "(#{meaning})"
     p form_question
 
      user_answer = gets.chomp
@@ -182,4 +208,4 @@ def round
 end
 end
 end
-form
+mood
