@@ -1,6 +1,6 @@
 require "CSV"
 
-    $arr_of_arrs = CSV.read('./jehle_verb_database.csv')
+    $arr_of_arrs = CSV.read('spanish_verb_database_fixed.csv')
 
     def time_length
 
@@ -53,7 +53,7 @@ def tense_indicative
     # else
     #   p "Please enter {y} or {n}"
     # end
-
+time_length
 end
 
 def tense_subjunctive
