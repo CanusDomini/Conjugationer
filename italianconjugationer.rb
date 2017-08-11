@@ -1,6 +1,6 @@
 require "CSV"
 
-    $arr_of_arrs = CSV.read('spanish_verb_database_fixed.csv')
+    $arr_of_arrs = CSV.read('italianverbs2.csv')
 
     def time_length
 
@@ -23,19 +23,19 @@ require "CSV"
       end
     end
 
-def tense_indicative
+def tense_indicativo
 
     p "What tense do you want to play with?"
 
-    p "present, future, imperfect, preterite, conditional,  present_perfect, future_perfect,  past_perfect, conditional_perfect, preterite_archaic"
+    p "presente, imperfetto, passato_remoto, futuro_semplice, passato_prossimo,  trapassato_prossimo, trapassato_remoto,  futuro_anteriore"
 
     $tense_choice = gets.chomp.to_sym
 # WHY DOES THE END OF THE STRING BECOME VARIABLES?
-        if ($tense_choice != :present) & ($tense_choice != :future) & ($tense_choice != :imperfect) & ($tense_choice != :preterite) & ($tense_choice != :conditional) & ($tense_choice != :present_perfect) & ($tense_choice != :future_perfect) & ($tense_choice != :past_perfect) & ($tense_choice != :conditional_perfect) & ($tense_choice != :preterite_archaic)
+        if ($tense_choice != :presente) & ($tense_choice != :imperfetto) & ($tense_choice != :passato_remoto) & ($tense_choice != :futuro_semplice) & ($tense_choice != :passato_prossimo) & ($tense_choice != :trapassato_prossimo) & ($tense_choice != :trapassato_remoto) & ($tense_choice != :futuro_anteriore)
 
 
           p "Please enter a tense from the list."
-          tense_indicative
+          tense_indicativo
 
         end
         # HOW CAN I DISABLE TIMED ROUNDS AND MAKE THEM UNLIMITED TIME?
@@ -56,19 +56,55 @@ def tense_indicative
 time_length
 end
 
-def tense_subjunctive
+def tense_congiuntivo
 
     p "What tense do you want to play with?"
 
-    p "present, future, imperfect, present_perfect, future_perfect, past_perfect"
+    p "presente, imperfetto, passato, trapassato"
 
     $tense_choice = gets.chomp.to_sym
 
-        if ($tense_choice != :present) & ($tense_choice != :future) & ($tense_choice != :imperfect) & ($tense_choice != :present_perfect) & ($tense_choice != :future_perfect) & ($tense_choice != :past_perfect)
+        if ($tense_choice != :presente) & ($tense_choice != :imperfetto) & ($tense_choice != :passato) & ($tense_choice != :trapassato)
 
 
           p "Please enter a tense from the list."
-          tense_subjunctive
+          tense_congiuntivo
+
+        end
+                time_length
+end
+
+def tense_condizionale
+
+    p "What tense do you want to play with?"
+
+    p "presente, passato"
+
+    $tense_choice = gets.chomp.to_sym
+
+        if ($tense_choice != :presente) & ($tense_choice != :passato)
+
+
+          p "Please enter a tense from the list."
+          tense_condizionale
+
+        end
+                time_length
+end
+
+def tense_imperativo
+
+    p "What tense do you want to play with?"
+
+    p "presente"
+
+    $tense_choice = gets.chomp.to_sym
+
+        if ($tense_choice != :presente)
+
+
+          p "Please enter a tense from the list."
+          tense_imperativo
 
         end
                 time_length
@@ -78,25 +114,37 @@ def mood_options
 
   while true
 
-    p "What mood do you want to play with: indicative/subjunctive?"
+    p "What mood do you want to play with: indicativo/congiuntivo/condizionale/imperativo?"
 
     $mood_player_choice = gets.chomp
 
-    if $mood_player_choice == "indicative" || $mood_player_choice == "i"
+    if $mood_player_choice == "indicativo" || $mood_player_choice == "i"
 
-        $mood = { present: 1, future: 2, imperfect: 3, preterite: 4, conditional: 5,  present_perfect: 6, future_perfect: 7,  past_perfect: 8, preterite_archaic: 9, conditional_perfect: 10}
+        $mood = { presente: 1, imperfetto: 2, passato_remoto: 3, futuro_semplice: 4, passato_prossimo: 5,  trapassato_prossimo: 6, trapassato_remoto: 7,  futuro_anteriore: 8}
 
-        tense_indicative
+        tense_indicativo
 
-    elsif $mood_player_choice == "subjunctive" || $mood_player_choice == "s"
+    elsif $mood_player_choice == "congiuntivo" || $mood_player_choice == "cg"
 
-        $mood = { present: 11, future: 12, imperfect: 13, present_perfect: 14, future_perfect: 15, past_perfect: 16}
+        $mood = { presente: 9, imperfetto: 10, passato: 11, trapassato: 12}
 
-        tense_subjunctive
+        tense_congiuntivo
+
+    elsif $mood_player_choice == "condizionale" || $mood_player_choice == "cd"
+
+        $mood = { presente: 13, passato: 14}
+
+        tense_condizionale
+
+    elsif $mood_player_choice == "imperativo" || $mood_player_choice == "i"
+
+        $mood = { presente: 15}
+
+        tense_imperativo
 
       else
 
-        p "Sorry, please type in either {indicative} or simply {i} for the indicative mood or {subjunctive} or simply {s} for the subjunctive."
+        p "Sorry, please type in either {indicativo} or simply {i}, {congiuntivo} or simply {cg}, {condizionale} or simply {cd}, or {imperativo} or {i}."
 
 
       end
@@ -124,19 +172,24 @@ end
 def study_list
   make_list_option = gets.chomp
    if make_list_option == "y"
+
      p "What would you like to name your study list?"
      study_list_name = gets.chomp
      file = File.open("#{study_list_name}.txt", "a+")
      $incorrect_array.each {|incorrect_element| file << "#{incorrect_element} \n"}
      exit(0)
+
    elsif make_list_option == "n"
+
      exit(0)
+
    else
+
      p "I'm sorry, please enter {y} for yes or {n} for no."
      study_list
+
    end
  end
-
 
 def round
 
@@ -149,10 +202,16 @@ def round
   while true
 
 
-    row_specifier = (18 * rand(0..635))
+    row_specifier = (15 * rand(0..174))
+    # p $arr_of_arrs
+    # p $arr_of_arrs.count
+    # p row_specifier
+    # p $arr_of_arrs[2611]
+    # p $mood[:presente].class
+    # p $tense_choice
     verb_row = $arr_of_arrs[$mood[$tense_choice] + row_specifier]
     infinitive_verb = verb_row[0]
-    random_form_chooser = rand(7..12)
+    random_form_chooser = rand(3..8)
     correct_answer = verb_row[random_form_chooser]
     form_question = $arr_of_arrs[0][random_form_chooser]
     mood = verb_row[3]
@@ -175,12 +234,12 @@ def round
      else
 
       $amt_incorrect += 1
-      $incorrect_array.push(correct_answer)
 
       p "Incorrect."
       p "Would you like to see the correct answer?"
       p "y/n?"
 
+      $incorrect_array.push(correct_answer)
       hint_request = gets.chomp
 
       if hint_request == "y"
@@ -203,8 +262,8 @@ def round
        p "Here are the answers that you missed: #{$incorrect_string}."
        p "Would you like to export them into a .txt file in order to keep a study list?"
        study_list
+
      end
 end
 end
-
 mood_options
