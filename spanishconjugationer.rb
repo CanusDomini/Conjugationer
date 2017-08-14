@@ -121,6 +121,20 @@ end
 #
 #     end
 # end
+def continue
+  p "Would you like to continue?"
+  p "y/n?"
+  continue_option = gets.chomp
+  if continue_option == 'y'
+    mood_options
+  elsif continue_option == 'n'
+    exit(0)
+  else
+    p "Please enter {y} or {n}."
+    continue
+  end
+end
+
 def study_list
   make_list_option = gets.chomp
    if make_list_option == "y"
@@ -128,9 +142,9 @@ def study_list
      study_list_name = gets.chomp
      file = File.open("#{study_list_name}.txt", "a+")
      $incorrect_array.each {|incorrect_element| file << "#{incorrect_element} \n"}
-     exit(0)
+     continue
    elsif make_list_option == "n"
-     exit(0)
+     continue
    else
      p "I'm sorry, please enter {y} for yes or {n} for no."
      study_list

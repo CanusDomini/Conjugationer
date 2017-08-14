@@ -169,6 +169,20 @@ end
 #
 #     end
 # end
+def continue
+  p "Would you like to continue?"
+  p "y/n?"
+  continue_option = gets.chomp
+  if continue_option == 'y'
+    mood_options
+  elsif continue_option == 'n'
+    exit(0)
+  else
+    p "Please enter {y} or {n}."
+    continue
+  end
+end
+
 def study_list
   make_list_option = gets.chomp
    if make_list_option == "y"
@@ -177,11 +191,11 @@ def study_list
      study_list_name = gets.chomp
      file = File.open("#{study_list_name}.txt", "a+")
      $incorrect_array.each {|incorrect_element| file << "#{incorrect_element} \n"}
-     exit(0)
+     continue
 
    elsif make_list_option == "n"
 
-     exit(0)
+     continue
 
    else
 
@@ -211,7 +225,7 @@ def round
     # p $tense_choice
     verb_row = $arr_of_arrs[$mood[$tense_choice] + row_specifier]
     infinitive_verb = verb_row[0]
-    random_form_chooser = rand(3..8)
+    random_form_chooser = rand(4..9)
     correct_answer = verb_row[random_form_chooser]
     form_question = $arr_of_arrs[0][random_form_chooser]
     mood = verb_row[3]
@@ -220,7 +234,7 @@ def round
     #question = "What is the #{form_question} #{tense_choice} of #{infinitive_verb} in the #{mood} mood?"
     correct_answer = verb_row[random_form_chooser]
 
-    p "#{infinitive_verb} (#{meaning})"
+    p "#{infinitive_verb} #{meaning}"
     p form_question
 
      user_answer = gets.chomp
