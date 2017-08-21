@@ -2,6 +2,56 @@ require "CSV"
 
     $arr_of_arrs = CSV.read('jlptverbs5.csv')
 
+    def vocab_chooser
+
+      p "Would you like to choose specific words to play with?"
+      $vocab_chooser_option = gets.chomp
+
+      if $vocab_chooser_option == 'y' || $vocab_chooser_option == 'yes'
+
+      incrementer = 0
+
+      $verb_array_row_hash = {} #this hash has the infinitive as the key and the row number as the value
+      while incrementer < 161
+
+        incrementer += 1
+        p verb_infinitive = $arr_of_arrs[incrementer][1]
+
+        $verb_array_row_hash[verb_infinitive] = incrementer
+
+      end
+
+      $verb_array_row_hash
+      p "What words would you like to play with?"
+      p "Bear in mind, your selection is limited to the few hundred verbs in our database."
+
+      $key_array = []
+      build_array = true
+      while build_array
+
+        verb_select = gets.chomp
+        if verb_select == 'done'
+          value_builder
+        end
+        $key_array << verb_select
+
+        p $key_array
+      end
+      elsif $vocab_chooser_option == 'n' || $vocab_chooser_option == 'no'
+        round
+      end
+    #  end
+    end
+def value_builder
+
+      $value_array = []
+      $key_array.each do |key|
+        value = $verb_array_row_hash[key]
+        $value_array << value
+      end
+      round
+    end
+
     def time_length
 
       while true
@@ -13,7 +63,7 @@ require "CSV"
         if (/\A\d+\z/ =~ length_option)
 
           $round_length = length_option.to_i
-          round
+          vocab_chooser
 
         else
 
@@ -121,6 +171,11 @@ def round
 
     verb_form_chooser = rand($verb_form)
     row_specifier = (rand(1..161))
+    # if $vocab_chooser_option == 'y' || $vocab_chooser_option == 'yes'
+    #   verb_row = $arr_of_arrs[$value_array.sample]
+    # elsif $vocab_chooser_option == 'n' || $vocab_chooser_option == 'no'
+    #   verb_row = $arr_of_arrs[row_specifier]
+    # end
     verb_row = $arr_of_arrs[row_specifier]
     hiragana_verb = verb_row[1]
     kanji_verb = verb_row[2]

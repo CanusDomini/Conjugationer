@@ -20,40 +20,27 @@ require "CSV"
           p "Please enter a number."
 
         end
+
       end
+
     end
 
 def tense_indicativo
 
     p "What tense do you want to play with?"
-
     p "presente, imperfetto, passato_remoto, futuro_semplice, passato_prossimo,  trapassato_prossimo, trapassato_remoto,  futuro_anteriore"
-
     $tense_choice = gets.chomp.to_sym
-# WHY DOES THE END OF THE STRING BECOME VARIABLES?
-        if ($tense_choice != :presente) & ($tense_choice != :imperfetto) & ($tense_choice != :passato_remoto) & ($tense_choice != :futuro_semplice) & ($tense_choice != :passato_prossimo) & ($tense_choice != :trapassato_prossimo) & ($tense_choice != :trapassato_remoto) & ($tense_choice != :futuro_anteriore)
+
+    if ($tense_choice != :presente) & ($tense_choice != :imperfetto) & ($tense_choice != :passato_remoto) & ($tense_choice != :futuro_semplice) & ($tense_choice != :passato_prossimo) & ($tense_choice != :trapassato_prossimo) & ($tense_choice != :trapassato_remoto) & ($tense_choice != :futuro_anteriore)
 
 
-          p "Please enter a tense from the list."
-          tense_indicativo
+      p "Please enter a tense from the list."
+      tense_indicativo
 
-        end
-        # HOW CAN I DISABLE TIMED ROUNDS AND MAKE THEM UNLIMITED TIME?
-    #   p "Would you like your rounds to be timed: y/n?"
-    # timed_option = gets.chomp
-    #
-    # if timed_option == 'y'
-    #
-    #   time_length
-    #
-    # elsif timed_option == 'n'
-    #   @round_length = -1
-    #   round
-    #
-    # else
-    #   p "Please enter {y} or {n}"
-    # end
-time_length
+    end
+
+  time_length
+
 end
 
 def tense_congiuntivo
@@ -151,24 +138,7 @@ def mood_options
     end
 end
 
-# def time_length
-#
-#   while true
-#
-#     p "How many seconds do you want your rounds to be?"
-#
-#     $round_length = gets.chomp.to_i
-#
-#     if $round_length.is_a? Integer
-#
-#       round
-#
-#     else
-#
-#       p "Please enter a number."
-#
-#     end
-# end
+
 def continue
   p "Would you like to continue?"
   p "y/n?"
@@ -217,12 +187,6 @@ def round
 
 
     row_specifier = (15 * rand(0..174))
-    # p $arr_of_arrs
-    # p $arr_of_arrs.count
-    # p row_specifier
-    # p $arr_of_arrs[2611]
-    # p $mood[:presente].class
-    # p $tense_choice
     verb_row = $arr_of_arrs[$mood[$tense_choice] + row_specifier]
     infinitive_verb = verb_row[0]
     random_form_chooser = rand(4..9)
