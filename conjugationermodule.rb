@@ -1,8 +1,4 @@
-
-# module Conjugationermodule
-#   extend self
-
-class Conjugationer
+#class Conjugationer
 
 def value_builder
 
@@ -14,20 +10,20 @@ def value_builder
       round
     end
 
-    def time_length
+def time_length
 
-      while true
+    while true
 
-        p "How many seconds do you want your round to be?"
+      p "How many seconds do you want your round to be?"
 
-        length_option = gets.chomp
+      length_option = gets.chomp
 
-        if (/\A\d+\z/ =~ length_option)
+      if (/\A\d+\z/ =~ length_option)
 
           $round_length = length_option.to_i
           vocab_chooser
 
-        else
+      else
 
           p "Please enter a number."
           time_length
@@ -40,7 +36,7 @@ def continue
   p "y/n?"
   continue_option = gets.chomp
   if continue_option == 'y'
-    form
+    form_options
   elsif continue_option == 'n'
     exit[0]
   else
@@ -70,5 +66,4 @@ def study_list
 
    end
  end
-end
 #end
