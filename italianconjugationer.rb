@@ -17,7 +17,7 @@ require "CSV"
         incrementer += 15
         p verb_infinitive = $arr_of_arrs[incrementer][0]
 
-        $verb_array_row_hash[verb_infinitive] = incrementer
+        $verb_array_row_hash[verb_infinitive] = incrementer - 1
 
       end
 
@@ -29,8 +29,8 @@ require "CSV"
       build_array = true
       while build_array
 
-        verb_select = gets.chomp
-        if verb_select == 'done'
+        verb_select = gets.chomp.upcase
+        if verb_select == 'done' || verb_select == 'DONE'
           value_builder
         end
         $key_array << verb_select

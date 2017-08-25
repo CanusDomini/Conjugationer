@@ -1,7 +1,10 @@
-require "CSV"
 
+# module Conjugationermodule
+#   extend self
+  
+  require 'CSV'
     $arr_of_arrs = CSV.read('jlptverbs5.csv')
-
+class Conjugationer
     def vocab_chooser
 
       p "Would you like to choose specific words to play with?"
@@ -12,7 +15,7 @@ require "CSV"
       incrementer = 0
 
       $verb_array_row_hash = {} #this hash has the infinitive as the key and the row number as the value
-      while incrementer < 216
+      while incrementer < 161
 
         incrementer += 1
         p verb_infinitive = $arr_of_arrs[incrementer][1]
@@ -237,12 +240,6 @@ def round
 end
 end
 end
-form
-
-# beta testing : all of the verbs are running as godan even when they are ichidan,
-#the pp form includes the polite te form and te form, there are spaces that need to be removed from correct_answer s**, no affirmative past tense,
-
-# missing casual(contextual) provisional a la 合うなら**
-#"Polite Causative Passive" 焼かせられます **
-# "Causal Passive Negative",Causal Passive Negative
-# 言わせられない
+#form
+end
+#end
