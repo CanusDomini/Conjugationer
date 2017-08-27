@@ -34,7 +34,11 @@ require_relative 'conjugationermodule'
         if verb_select == 'done'
           value_builder
         end
+        if $verb_array_row_hash.key?("#{verb_select}") == false
+          p "Please only copy and paste words from the list."
+        else
         $key_array << verb_select
+      end
 
         p $key_array
       end
@@ -45,7 +49,7 @@ require_relative 'conjugationermodule'
     end
 
 def form_options
-  p "What form do you want to play with: plain non-past/plain past/te form/i form/ifs/potential/passive/causative/causative passive/volitional/conjectural/alternative/imperative?"
+  p "What form do you want to play with: plain non-past/plain past/te form/i form/ifs/potential/passive/causative/causative passive/volitional/conjectural/alternative/imperative/honorific?"
   $form_option = gets.chomp
   if $form_option  == "plain non-past" || $form_option  == "np"
     $verb_form = (2..5)
@@ -64,7 +68,7 @@ def form_options
   elsif $form_option  == "causative" || $form_option  == 'c'
     $verb_form = (35..42)
   elsif $form_option  == "causative passive" || $form_option  == 'cp'
-    $verb_form = (43..50)
+    $verb_form = (47..50)
   elsif $form_option  == "volitional" || $form_option  == 'v'
     $verb_form = (51..54)
   elsif $form_option  == "conjectural" || $form_option  == 'co'
@@ -73,6 +77,8 @@ def form_options
     $verb_form = (59..62)
   elsif $form_option  == "imperative" || $form_option  == 'i'
     $verb_form = (63..66)
+  elsif $form_option  == "honorific" || $form_option  == 'h'
+    $verb_form = (67..70)
   else
     "Please type an option from the list."
   end
@@ -90,7 +96,7 @@ def round
   while true
 
     verb_form_chooser = rand($verb_form)
-    row_specifier = (rand(1..216))
+    row_specifier = (rand(1..214))
     if $vocab_chooser_option == 'y' || $vocab_chooser_option == 'yes'
       verb_row = $arr_of_arrs[$value_array.sample]
     elsif $vocab_chooser_option == 'n' || $vocab_chooser_option == 'no'

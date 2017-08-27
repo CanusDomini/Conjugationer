@@ -31,10 +31,15 @@ require_relative 'conjugationermodule'
       while build_array
 
         verb_select = gets.chomp.upcase
+
         if verb_select == 'done' || verb_select == 'DONE'
           value_builder
         end
+        if $verb_array_row_hash.key?("#{verb_select}") == false
+          p "Please only copy and paste words from the list."
+        else
         $key_array << verb_select
+      end
 
         p $key_array
       end
@@ -177,13 +182,12 @@ def round
     # verb_row = $arr_of_arrs[$mood[$tense_choice] + row_specifier]
     infinitive_verb = verb_row[0]
     random_form_chooser = rand(4..9)
-    correct_answer = verb_row[random_form_chooser]
     form_question = $arr_of_arrs[0][random_form_chooser]
     mood = verb_row[3]
     meaning = verb_row[1]
     question = "#{infinitive_verb} #{form_question}"
     #question = "What is the #{form_question} #{tense_choice} of #{infinitive_verb} in the #{mood} mood?"
-    correct_answer = verb_row[random_form_chooser]
+    correct_answer = verb_row[random_form_chooser].lstrip!
 
     p "#{infinitive_verb} #{meaning}"
     p form_question

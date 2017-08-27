@@ -34,7 +34,11 @@ require_relative 'conjugationermodule'
         if verb_select == 'done' || verb_select == 'DONE'
           value_builder
         end
+        if $verb_array_row_hash.key?("#{verb_select}") == false
+          p "Please only copy and paste words from the list."
+        else
         $key_array << verb_select
+        end
 
         p $key_array
       end
