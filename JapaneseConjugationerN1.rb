@@ -1,7 +1,7 @@
 require "CSV"
 require_relative 'conjugationermodule'
 
-    $arr_of_arrs = CSV.read('jlptverbs5.csv')
+    $arr_of_arrs = CSV.read('jlptverbs100.csv')
 
     def vocab_chooser
 
@@ -66,19 +66,19 @@ def form_options
   elsif $form_option  == "passive" || $form_option  == 'pa'
     $verb_form = (32..35)
   elsif $form_option  == "causative" || $form_option  == 'c'
-    $verb_form = (36..43)
+    $verb_form = (36..42)
   elsif $form_option  == "causative passive" || $form_option  == 'cp'
-    $verb_form = (48..51)
+    $verb_form = (43..46)
   elsif $form_option  == "volitional" || $form_option  == 'v'
-    $verb_form = (52..55)
+    $verb_form = (47..50)
   elsif $form_option  == "conjectural" || $form_option  == 'co'
-    $verb_form = (56..59)
+    $verb_form = (51..54)
   elsif $form_option  == "alternative" || $form_option  == 'a'
-    $verb_form = (60..63)
+    $verb_form = (55..58)
   elsif $form_option  == "imperative" || $form_option  == 'i'
-    $verb_form = (64..67)
+    $verb_form = (59..62)
   elsif $form_option  == "honorific" || $form_option  == 'h'
-    $verb_form = (68..71)
+    $verb_form = (63..66)
   else
     "Please type an option from the list."
     form_options
@@ -144,9 +144,9 @@ def round
      t2 = Time.now
      delta = t1 - t2
      $delta_i = delta.to_i
+
      round_ending
-
-
+    
 end
 end
 form_options

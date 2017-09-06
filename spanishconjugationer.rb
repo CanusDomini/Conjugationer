@@ -189,19 +189,11 @@ def round
 
      t2 = Time.now
      delta = t1 - t2
-     delta_i = delta.to_i
+     $delta_i = delta.to_i
+     round_ending
 
 
-     if delta_i <= -$round_length
-       $incorrect_string = $incorrect_array.to_s.gsub(Regexp.union('"', '[', ']', "~,"), '')
-       decimal_correct = ($amt_correct / ($amt_correct + $amt_incorrect.to_f))
-       percentage_correct = (decimal_correct.round(2) * 100).to_i
-       p "Good job you got #{$amt_correct} correct and #{$amt_incorrect} incorrect!"
-       p "That's a #{percentage_correct}%!!"
-       p "Here are the answers that you missed: #{$incorrect_string}."
-       p "Would you like to export them into a .txt file in order to keep a study list?"
-       study_list
-     end
+
 end
 end
 
