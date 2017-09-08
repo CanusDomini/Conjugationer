@@ -97,7 +97,7 @@ def round
   while true
 
     verb_form_chooser = rand($verb_form)
-    row_specifier = (rand(1..190))
+    row_specifier = (rand(1..506))
     if $vocab_chooser_option == 'y' || $vocab_chooser_option == 'yes'
       verb_row = $arr_of_arrs[$value_array.sample]
     elsif $vocab_chooser_option == 'n' || $vocab_chooser_option == 'no'
